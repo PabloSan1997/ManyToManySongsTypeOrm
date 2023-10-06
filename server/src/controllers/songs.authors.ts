@@ -62,4 +62,18 @@ export class ControllerSongs {
             res.json({ message: 'No se pudo', error })
         }
     }
+    async deleteSong(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id_cancion } = req.params as { id_cancion: string }
+            const repositorio = AppDataSourse.getRepository(Songs);
+            const data = await repositorio.findOne({where:{id_cancion}, relations:{authors:true}});
+            if(!data) throw 'No se puede borrar elemento';
+            data.authors = [];
+            await repositorio.manager.save(data);
+            await repositorio.delete({id_cancion});
+            res.json({message:'sePudo'});
+        } catch (error) {
+            res.json({ error });
+        }
+    }
 }

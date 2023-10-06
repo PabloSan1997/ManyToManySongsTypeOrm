@@ -7,4 +7,5 @@ const controller = new ControllerSongs();
 routeSongs.get('/', controller.readSongs);
 routeSongs.get('/search', controller.readSearchName);
 routeSongs.get('/:id_cancion', controller.readIdSong);
+routeSongs.delete('/:id_cancion', controller.deleteSong);
 routeSongs.post('/', controller.addSongs);
