@@ -7,27 +7,33 @@ import { Author } from '../db/models/Author';
 export class ControllerSongs {
     async readSongs(req: Request, res: Response, next: NextFunction) {
         const repositorio = AppDataSourse.getRepository(Songs);
-        const data = await repositorio.find({relations:{
-            authors:true
-        }});
-        res.json(data);
-    }
-    async readIdSong(req: Request, res: Response, next: NextFunction){
-        const repositorio = AppDataSourse.getRepository(Songs);
-        const {id_cancion} = req.params as  {id_cancion:string};
-        const data = await repositorio.findOne({where:{id_cancion}, relations:{authors:true}});
-        res.json(data);
-    }
-    async readSearchName(req: Request, res: Response, next: NextFunction){
-        const repositorio = AppDataSourse.getRepository(Songs);
-        const {nombre} = req.query as {nombre:string}
-        const data = await repositorio.find({relations:{authors:true}});
-        const filtrado = data.filter(e=>{
-            const name = nombre.toLocaleLowerCase();
-            const nameSong = e.name_sing.toLocaleLowerCase();
-            return nameSong.includes(name);
+        const data = await repositorio.find({
+            relations: {
+                authors: true
+            }
         });
-        res.json(filtrado);
+        res.json(data);
+    }
+    async readIdSong(req: Request, res: Response, next: NextFunction) {
+        const repositorio = AppDataSourse.getRepository(Songs);
+        const { id_cancion } = req.params as { id_cancion: string };
+        const data = await repositorio.findOne({ where: { id_cancion }, relations: { authors: true } });
+        res.json(data);
+    }
+    async readSearchName(req: Request, res: Response, next: NextFunction) {
+        try {
+            const repositorio = AppDataSourse.getRepository(Songs);
+            const { nombre } = req.query as { nombre: string }
+            const data = await repositorio.find({ relations: { authors: true } });
+            const filtrado = data.filter(e => {
+                const name = nombre.toLocaleLowerCase();
+                const nameSong = e.name_sing.toLocaleLowerCase();
+                return nameSong.includes(name);
+            });
+            res.json(filtrado);
+        } catch (error) {
+            res.json(error);
+        }
     }
     async addSongs(req: Request, res: Response, next: NextFunction) {
         try {
@@ -42,11 +48,11 @@ export class ControllerSongs {
                 });
                 return data;
             }));
-            
-            const autores = solicitudes.filter(element=>!!element) as Author[];
+
+            const autores = solicitudes.filter(element => !!element) as Author[];
             const nuevaCancion = {
                 ...miCancion,
-                authors:autores
+                authors: autores
             }
             const generar = repositorio.create(nuevaCancion);
             await repositorio.manager.save(generar);
