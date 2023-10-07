@@ -2,7 +2,7 @@
 interface AuthorReq {
     name_author: string;
     birthday: string;
-    image_autho: string;
+    image_author: string;
 }
 interface AuthorRes extends AuthorReq {
     id_autor: string;

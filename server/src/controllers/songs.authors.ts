@@ -65,7 +65,7 @@ export class ControllerSongs {
             }
             const generar = repositorio.create(nuevaCancion);
             await repositorio.manager.save(generar);
-            res.json({ message: 'hola' });
+            res.json({ message: 'Cancion agregada' });
         }
         catch (error) {
             res.json({ message: 'No se pudo', error })
@@ -80,7 +80,7 @@ export class ControllerSongs {
             data.authors = [];
             await repositorio.manager.save(data);
             await repositorio.delete({ id_cancion });
-            res.json({ message: 'sePudo' });
+            res.json({ message: 'Elemento eliminado' });
         } catch (error) {
             next(error);
         }
