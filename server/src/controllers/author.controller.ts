@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppDataSourse } from '../db/config';
 import { Author } from '../db/models/Author';
+import Boom from '@hapi/boom';
 
 export class ControllerAuthor {
     async readAuthors(req: Request, res: Response, next: NextFunction) {
@@ -34,24 +35,28 @@ export class ControllerAuthor {
         }
     }
     async addAuthors(req: Request, res: Response, next: NextFunction) {
-        const cuerpo = req.body as AuthorReq;
-        const repositorio = AppDataSourse.getRepository(Author);
-        const nuevo = repositorio.create(cuerpo);
-        await repositorio.manager.save(nuevo);
-        res.json(nuevo);
+        try {
+            const cuerpo = req.body as AuthorReq;
+            const repositorio = AppDataSourse.getRepository(Author);
+            const nuevo = repositorio.create(cuerpo);
+            await repositorio.manager.save(nuevo);
+            res.json(nuevo);
+        } catch (error) {
+            next(Boom.badRequest(error as string));
+        }
     }
     async deleteAuthor(req: Request, res: Response, next: NextFunction) {
         try {
             const repositorio = AppDataSourse.getRepository(Author);
             const { id_autor } = req.params as { id_autor: string };
             const dato = await repositorio.findOne({ where: { id_autor }, relations: { songs: true } });
-            if(!dato) throw 'No se puede borrar elemento';
+            if (!dato) throw Boom.notFound('No se encontró elemeto a borrar');
             dato.songs = [];
             await repositorio.manager.save(dato);
-            await repositorio.delete({id_autor});
-            res.json({message:'Autor borrado'});
+            await repositorio.delete({ id_autor });
+            res.json({ message: 'Autor borrado' });
         } catch (error) {
-            res.json({ error });
+            next(error);
         }
 
     }

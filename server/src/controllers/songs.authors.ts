@@ -1,4 +1,4 @@
-
+import Boom from '@hapi/boom';
 import { Request, Response, NextFunction } from 'express';
 import { AppDataSourse } from '../db/config';
 import { Songs } from '../db/models/Songs';
@@ -6,19 +6,28 @@ import { Author } from '../db/models/Author';
 
 export class ControllerSongs {
     async readSongs(req: Request, res: Response, next: NextFunction) {
-        const repositorio = AppDataSourse.getRepository(Songs);
-        const data = await repositorio.find({
-            relations: {
-                authors: true
-            }
-        });
-        res.json(data);
+        try {
+            const repositorio = AppDataSourse.getRepository(Songs);
+            const data = await repositorio.find({
+                relations: {
+                    authors: true
+                }
+            });
+            res.json(data);
+        } catch (error) {
+            next(Boom.badImplementation());
+        }
     }
     async readIdSong(req: Request, res: Response, next: NextFunction) {
-        const repositorio = AppDataSourse.getRepository(Songs);
-        const { id_cancion } = req.params as { id_cancion: string };
-        const data = await repositorio.findOne({ where: { id_cancion }, relations: { authors: true } });
-        res.json(data);
+        try {
+            const repositorio = AppDataSourse.getRepository(Songs);
+            const { id_cancion } = req.params as { id_cancion: string };
+            const data = await repositorio.findOne({ where: { id_cancion }, relations: { authors: true } });
+            if (!data) throw Boom.notFound('No se encontro dicho elemento');
+            res.json(data);
+        } catch (error) {
+            next(error);
+        }
     }
     async readSearchName(req: Request, res: Response, next: NextFunction) {
         try {
@@ -66,14 +75,14 @@ export class ControllerSongs {
         try {
             const { id_cancion } = req.params as { id_cancion: string }
             const repositorio = AppDataSourse.getRepository(Songs);
-            const data = await repositorio.findOne({where:{id_cancion}, relations:{authors:true}});
-            if(!data) throw 'No se puede borrar elemento';
+            const data = await repositorio.findOne({ where: { id_cancion }, relations: { authors: true } });
+            if (!data) throw Boom.notFound('No se puede borrar elemento');
             data.authors = [];
             await repositorio.manager.save(data);
-            await repositorio.delete({id_cancion});
-            res.json({message:'sePudo'});
+            await repositorio.delete({ id_cancion });
+            res.json({ message: 'sePudo' });
         } catch (error) {
-            res.json({ error });
+            next(error);
         }
     }
 }
