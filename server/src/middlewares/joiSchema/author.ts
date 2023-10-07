@@ -12,3 +12,9 @@ export const addAutorSchemaJoi = joi.object(
         image_author
     }
 );
+
+export const idSchemaJoiAutor = joi.object(
+    {
+        id_autor
+    }
+);
