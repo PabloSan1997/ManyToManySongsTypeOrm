@@ -16,3 +16,4 @@ export const addSongJoi = joi.object({
 });
 
 export const idSchemajoiSong = joi.object({ id_cancion });
+export const AlbumJoiSchema = joi.object({album:album_name});

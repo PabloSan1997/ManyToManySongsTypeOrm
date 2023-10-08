@@ -29,6 +29,21 @@ export class ControllerSongs {
             next(error);
         }
     }
+    async readAlbumSongs(req: Request, res: Response, next: NextFunction){
+        try {
+            const {album} = req.params as {album:string}
+            const repositorio = AppDataSourse.getRepository(Songs);
+            const data = await repositorio.find();
+            const filtrar = data.filter(p=>{
+                const lowAlbum = album.toLocaleLowerCase();
+                const lowAlbim_name = p.album_name.toLocaleLowerCase();
+                return lowAlbim_name.includes(lowAlbum);
+            });
+            res.json(filtrar);
+        } catch (error) {
+            next();
+        }
+    }
     async readSearchName(req: Request, res: Response, next: NextFunction) {
         try {
             const repositorio = AppDataSourse.getRepository(Songs);

@@ -12,6 +12,8 @@ routeSongs.get('/', controller.readSongs);
 
 routeSongs.get('/search', controller.readSearchName);
 
+routeSongs.get('/album/:album', controller.readAlbumSongs);
+
 routeSongs.get('/:id_cancion',
     joiHandle(idSchemajoiSong, 'params'),
     controller.readIdSong);
