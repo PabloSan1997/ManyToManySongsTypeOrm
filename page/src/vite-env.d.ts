@@ -37,3 +37,8 @@ interface Songs_Add extends Autor_Base{
 type Children = {
     children:JSX.Element|JSX.Element[]
 }
+
+type Contexto = {
+    canciones:Songs_full[],
+    autores:Autor_full[]
+}

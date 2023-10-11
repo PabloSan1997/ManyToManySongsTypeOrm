@@ -1,7 +1,14 @@
+import { MyHeader } from "../components/Header";
+import { SimpleAutorArea } from "../components/SimpleAuthorsArea";
+import { SimpleSongArea } from "../components/SimpleSongArea";
 
 
-export function Home(){
+export function Home() {
     return (
-        <div className="Home">Casa</div>
+        <>
+            <MyHeader />
+            <SimpleAutorArea />
+            <SimpleSongArea />
+        </>
     );
 }
