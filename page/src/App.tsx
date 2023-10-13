@@ -14,11 +14,11 @@ export default function App() {
             element:<Navigate to='/home'/>
         },
         {
-            path:'/songs',
+            path:'/songs/:id',
             element:<Songs/>
         },
         {
-            path:'/authors',
+            path:'/authors/:id',
             element:<Authors/>
         }
     ]);
