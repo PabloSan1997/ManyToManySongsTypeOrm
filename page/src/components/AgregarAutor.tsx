@@ -43,6 +43,7 @@ export function AgregarAutor() {
     } 
     return (
         <form action="" className="agregar-autor formulario" onSubmit={subir}>
+           <h2>Agregar Cantante Nuevo</h2>
             <label className="label">Nombre</label>
             {errorTexto.name_author && <p className="error">Escriba el Nombre</p>}
             <input

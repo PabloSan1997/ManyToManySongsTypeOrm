@@ -20,7 +20,7 @@ const initialStateError = {
     album_name: false,
     authors: false
 }
-
+type Opciones = "name_sing" | 'release_date' | 'image_Album' | 'album_name';
 export function AgregarCancion() {
     const { autores } = UseContexto();
     const nombres = autores.map(p => {
@@ -43,7 +43,11 @@ export function AgregarCancion() {
         const nuevo = autores.filter(p => p != a);
         setTextoCancion({ ...textoCancion, authors: nuevo });
     }
-
+    const escribir = (e: React.ChangeEvent<HTMLInputElement>, opcion: Opciones) => {
+        const clonar = { ...textoCancion };
+        clonar[opcion] = e.target.value;
+        setTextoCancion(clonar);
+    }
     const subir = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -60,15 +64,18 @@ export function AgregarCancion() {
             setErroresCanciones(initialStateError);
         }
     }
-    console.log(erroresCanciones);
+
     return (
         <form className="formulario agregar-cancion" onSubmit={subir}>
+            <h2>Agregar Cancion Nueva</h2>
             <label className="label">Nombre</label>
             {erroresCanciones.name_sing && <p className="error">Agregue nombre</p>}
             <input
                 type="text"
                 className="entrada"
                 placeholder="Escribir"
+                value={textoCancion.name_sing}
+                onChange={e => escribir(e, 'name_sing')}
             />
             <label className="label">Fecha de Lanzamiento</label>
             {erroresCanciones.release_date && <p className="error">Agregue fecha</p>}
@@ -76,6 +83,8 @@ export function AgregarCancion() {
                 type="date"
                 className="entrada"
                 placeholder="Escribir"
+                value={textoCancion.release_date}
+                onChange={e => escribir(e, 'release_date')}
             />
             <label className="label">Nombre del album</label>
             {erroresCanciones.album_name && <p className="error">Agregue nombre del album</p>}
@@ -83,6 +92,8 @@ export function AgregarCancion() {
                 type="text"
                 className="entrada"
                 placeholder="Escribir"
+                value={textoCancion.album_name}
+                onChange={e => escribir(e, 'album_name')}
             />
             <label className="label">Imagen del album</label>
             {erroresCanciones.image_Album && <p className="error">Agregue link</p>}
@@ -90,6 +101,8 @@ export function AgregarCancion() {
                 type="text"
                 className="entrada"
                 placeholder="Escribir"
+                value={textoCancion.image_Album}
+                onChange={e => escribir(e, 'image_Album')}
             />
             <label className="label">Seleccione los autores</label>
             {erroresCanciones.authors && <p className="error">Agregue los autores</p>}
