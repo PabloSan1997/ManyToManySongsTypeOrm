@@ -30,7 +30,7 @@ interface Songs_full extends Songs_id {
     authors:Autor_ID[]
 }
 
-interface Songs_Add extends Autor_Base{
+interface Songs_Add extends Songs_Base{
     authors:string[]
 }
 
