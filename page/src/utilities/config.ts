@@ -8,7 +8,7 @@ export const config = {
 }
 
 const permiso_usar = 'lFG32NUoQ7tWfBHV4sOgSxzRLwu9kDpI';
-const permiso_edita = 'f9a6a5dffa16f9313a2243218294a26e9ffb550aa373d33777203e0ea00efba5';
+const permiso_editar = 'f9a6a5dffa16f9313a2243218294a26e9ffb550aa373d33777203e0ea00efba5';
 
 export const header_usar = {
     permiso_usar,
@@ -16,7 +16,7 @@ export const header_usar = {
 }
 
 export const header_edit = {
-    permiso_edita,
+    permiso_editar,
     permiso_usar,
     'Content-Type':'application/json'
 }

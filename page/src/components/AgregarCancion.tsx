@@ -1,6 +1,7 @@
 
 import React from "react";
 import { UseContexto } from "../Context";
+import { addSong } from "../api/addData";
 
 type AutorOpcion = {
     name_author: string, id_autor: string
@@ -22,7 +23,7 @@ const initialStateError = {
 }
 type Opciones = "name_sing" | 'release_date' | 'image_Album' | 'album_name';
 export function AgregarCancion() {
-    const { autores } = UseContexto();
+    const { autores, actualizar, setAztualizar } = UseContexto();
     const nombres = autores.map(p => {
         const { id_autor, name_author } = p;
         return { id_autor, name_author }
@@ -61,7 +62,13 @@ export function AgregarCancion() {
                 release_date: !textoCancion.release_date
             });
         } else {
-            setErroresCanciones(initialStateError);
+            addSong(textoCancion)
+            .then(()=>{
+                setAztualizar(!actualizar);
+                setErroresCanciones(initialStateError);
+                setTextoCancion(initialState);
+            })
+            .catch(error=>console.error(error));
         }
     }
 

@@ -40,5 +40,7 @@ type Children = {
 
 type Contexto = {
     canciones:Songs_full[],
-    autores:Autor_full[]
+    autores:Autor_full[],
+    setAztualizar(a:boolean):void,
+    actualizar:boolean
 }

@@ -4,36 +4,39 @@ import { readAuthors, readSongs } from "./api/readData";
 
 const Contexto = React.createContext({});
 
-export function ProviderContext({children}:Children){
+export function ProviderContext({ children }: Children) {
     const [canciones, setCanciones] = React.useState<Songs_full[]>([]);
     const [autores, setAutores] = React.useState<Autor_full[]>([]);
-
-    React.useEffect(()=>{
+    const [actualizar, setAztualizar] = React.useState(false);
+   
+    React.useEffect(() => {
         readSongs()
-        .then(data=>{
-            setCanciones(data);
-        })
-        .catch(error=>{
-            console.error(error);
-            setCanciones([]);
-        });
+            .then(data => {
+                setCanciones(data);
+            })
+            .catch(error => {
+                console.error(error);
+                setCanciones([]);
+            });
         readAuthors()
-        .then(data=>{
-            setAutores(data);
-        })
-        .catch(error=>{
-            console.error(error);
-            setAutores([]);
-        });
-    },[]);
-    return(
+            .then(data => {
+                setAutores(data);
+            })
+            .catch(error => {
+                console.error(error);
+                setAutores([]);
+            });
+    }, [actualizar]);
+    return (
         <Contexto.Provider value={{
             canciones,
-            autores
+            autores,
+            setAztualizar,
+            actualizar
         }}>
             {children}
         </Contexto.Provider>
     );
 }
 
-export const UseContexto =()=> React.useContext(Contexto) as Contexto;
+export const UseContexto = () => React.useContext(Contexto) as Contexto;
