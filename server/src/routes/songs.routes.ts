@@ -15,15 +15,15 @@ routeSongs.get('/search', controller.readSearchName);
 routeSongs.get('/album/:album', controller.readAlbumSongs);
 
 routeSongs.get('/:id_cancion',
-    joiHandle(idSchemajoiSong, 'params'),
-    controller.readIdSong);
+	joiHandle(idSchemajoiSong, 'params'),
+	controller.readIdSong);
 
 routeSongs.delete('/:id_cancion',
-    joiHandle(idSchemajoiSong, 'params'),
-    permiso.editDataPermision,
-    controller.deleteSong);
+	joiHandle(idSchemajoiSong, 'params'),
+	permiso.editDataPermision,
+	controller.deleteSong);
 
 routeSongs.post('/',
-    permiso.editDataPermision,
-    joiHandle(addSongJoi, 'body'),
-    controller.addSongs);
+	permiso.editDataPermision,
+	joiHandle(addSongJoi, 'body'),
+	controller.addSongs);

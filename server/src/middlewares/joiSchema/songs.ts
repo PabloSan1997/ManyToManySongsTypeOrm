@@ -8,11 +8,11 @@ const album_name = joi.string().min(1).required();
 const authors = joi.array().min(1).items(joi.string()).required();
 
 export const addSongJoi = joi.object({
-    name_sing,
-    release_date,
-    image_Album,
-    album_name,
-    authors
+	name_sing,
+	release_date,
+	image_Album,
+	album_name,
+	authors
 });
 
 export const idSchemajoiSong = joi.object({ id_cancion });

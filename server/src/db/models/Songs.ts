@@ -5,20 +5,20 @@ import { Author } from './Author';
 @Entity()
 export class Songs{
     @PrimaryGeneratedColumn('uuid')
-    id_cancion:string;
+    	id_cancion:string;
 
     @Column({length:60})
-    name_sing:string;
+    	name_sing:string;
 
     @Column()
-    release_date:Date;
+    	release_date:Date;
 
     @Column({length:1500})
-    image_Album:string;
+    	image_Album:string;
 
     @Column({length:60})
-    album_name:string;
+    	album_name:string;
 
     @ManyToMany(()=>Author, (author)=>author.songs)
-    authors:Author[];
+    	authors:Author[];
 }

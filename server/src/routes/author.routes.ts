@@ -13,15 +13,15 @@ routeAuthor.get('/', controller.readAuthors);
 routeAuthor.get('/search', controller.searchAuthor);
 
 routeAuthor.get('/:id_autor',
-    joiHandle(idSchemaJoiAutor, 'params'),
-    controller.readOneAuthor);
+	joiHandle(idSchemaJoiAutor, 'params'),
+	controller.readOneAuthor);
 
 routeAuthor.delete('/:id_autor',
-    joiHandle(idSchemaJoiAutor, 'params'),
-    permiso.editDataPermision,
-    controller.deleteAuthor);
+	joiHandle(idSchemaJoiAutor, 'params'),
+	permiso.editDataPermision,
+	controller.deleteAuthor);
 
 routeAuthor.post('/',
-    permiso.editDataPermision,
-    joiHandle(addAutorSchemaJoi, 'body'),
-    controller.addAuthors);
+	permiso.editDataPermision,
+	joiHandle(addAutorSchemaJoi, 'body'),
+	controller.addAuthors);

@@ -29,6 +29,7 @@ export function Songs() {
                 </div>
                 <div className="area">
                     <h2 className="nombre">{song.name_sing}</h2>
+                    <p className="album">Album: {song.album_name}</p>
                     <p className="texto">Lanzamiento: {convertirFecha(song.release_date)}</p>
                 </div>
             </div>
