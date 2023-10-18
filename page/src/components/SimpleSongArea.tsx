@@ -1,5 +1,5 @@
 import { UseContexto } from "../Context";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function SimpleSongArea() {
     const { canciones } = UseContexto();
@@ -30,11 +30,13 @@ export function OneSong({ name_sing, album_name, image_Album, release_date, id_c
     const date = new Date(Date.parse(release_date));
     const navegar = useNavigate();
     return (
-        <div className="one_song" onClick={()=>navegar('/songs/'+id_cancion)}>
-            <h2 className="nombre">{name_sing}</h2>
+        <div className="one_song caja" onClick={() => navegar('/songs/' + id_cancion)}>
             <img src={image_Album} alt="" className="foto" />
-            <p className="texto">{album_name}</p>
-            <p className="date">{date.toLocaleDateString()}</p>
+            <div className="area_texto">
+                <h2 className="nombre">{name_sing}</h2>
+                <p className="texto">{album_name}</p>
+                <p className="date">{date.toLocaleDateString()}</p>
+            </div>
         </div>
     );
 }

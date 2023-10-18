@@ -1,0 +1,56 @@
+.area_principal {
+    display: flex;
+    width: 95%;
+    margin: 2rem auto 0 auto;
+
+    .area {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+
+        .foto {
+            margin: auto;
+            max-width: 90%;
+            max-height: 400px;
+        }
+
+        color: rgb(223, 247, 223);
+
+        .nombre {
+            font-size: 6rem;
+            max-width: 98%;
+            margin: auto auto 0 auto;
+        }
+
+        .texto {
+            font-size: 1.5rem;
+            margin: 0 auto auto auto;
+        }
+    }
+}
+
+.complementos {
+    width: 95%;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgb(2, 14, 29);
+
+    .seccion {
+        font-size: 2.8rem;
+        padding: 10px 0 10px 2%;
+        width: 98%;
+        background: black;
+        color: rgb(204, 229, 236);
+    }
+
+    color: rgb(233, 233, 252);
+
+    .cajas {
+        width: 95%;
+        margin:20px auto;
+        grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+        gap: 30px;
+        display: grid;
+    }
+}

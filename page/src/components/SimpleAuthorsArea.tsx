@@ -1,5 +1,5 @@
 import { UseContexto } from "../Context";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function SimpleAutorArea() {
     const { autores } = UseContexto();
@@ -14,7 +14,7 @@ export function SimpleAutorArea() {
     });
 
     return (
-        <div className={"contenedor contenedor_autores"}>
+        <div className="contenedor contenedor_autores">
             <h2 className="titulo">Artistas</h2>
             <div className="cajas">
                 {simple.map(p => (
@@ -29,10 +29,12 @@ export function OneAutor({ name_author, birthday, image_author, id_autor }: Auto
     const date = new Date(Date.parse(birthday));
     const navegar = useNavigate();
     return (
-        <div className="one_autor" onClick={()=>navegar('/authors/'+id_autor)}>
-            <h2 className="nombre">{name_author}</h2>
+        <div className="one_autor caja" onClick={() => navegar('/authors/' + id_autor)}>
             <img src={image_author} alt="" className="foto" />
-            <p className="date">{date.toLocaleDateString()}</p>
+            <div className="area_texto">
+                <h2 className="nombre">{name_author}</h2>
+                <p className="date">{date.toLocaleDateString()}</p>
+            </div>
         </div>
     );
 }
