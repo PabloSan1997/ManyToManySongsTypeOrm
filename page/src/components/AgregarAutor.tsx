@@ -19,7 +19,7 @@ const initialStateError = {
 type Opciones = 'birthday' | 'name_author' | 'image_author';
 
 
-export function AgregarAutor() {
+export function AgregarAutor({mostrar}:{mostrar:boolean}) {
     const [textAutor, setTextAutor] = React.useState(initialState);
     const [errorTexto, setErrorTexto] = React.useState(initialStateError);
     const { setAztualizar, actualizar } = UseContexto();
@@ -52,7 +52,7 @@ export function AgregarAutor() {
         }
     }
     return (
-        <form action="" className="agregar-autor formulario" onSubmit={subir}>
+        <form action="" className={`agregar-autor formulario ${mostrar?'mostrar':''}`} onSubmit={subir}>
             <h2>Agregar Cantante Nuevo</h2>
             <label className="label">Nombre</label>
             {errorTexto.name_author && <p className="error">Escriba el Nombre</p>}

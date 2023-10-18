@@ -14,7 +14,7 @@ export function SimpleAutorArea() {
     });
 
     return (
-        <div className="contenedor contenedor_autores">
+        <div className={"contenedor contenedor_autores"}>
             <h2 className="titulo">Artistas</h2>
             <div className="cajas">
                 {simple.map(p => (

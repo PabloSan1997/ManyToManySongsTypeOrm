@@ -22,7 +22,7 @@ const initialStateError = {
     authors: false
 }
 type Opciones = "name_sing" | 'release_date' | 'image_Album' | 'album_name';
-export function AgregarCancion() {
+export function AgregarCancion({mostrar}:{mostrar:boolean}) {
     const { autores, actualizar, setAztualizar } = UseContexto();
     const nombres = autores.map(p => {
         const { id_autor, name_author } = p;
@@ -73,7 +73,7 @@ export function AgregarCancion() {
     }
 
     return (
-        <form className="formulario agregar-cancion" onSubmit={subir}>
+        <form className={`formulario agregar-cancion ${mostrar?'mostrar':''}`} onSubmit={subir}>
             <h2>Agregar Cancion Nueva</h2>
             <label className="label">Nombre</label>
             {erroresCanciones.name_sing && <p className="error">Agregue nombre</p>}
@@ -141,6 +141,7 @@ function MostrarAutores({
     const mostrar = autores.filter(p => autoresSeleccionados.includes(p.id_autor));
     return (
         <div className="areaAutores">
+            <h3>Autores:</h3>
             {mostrar.map(p => (
                 <p
                     className="mostrar-nombre"
